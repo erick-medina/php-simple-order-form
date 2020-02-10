@@ -22,11 +22,16 @@
             </li>
         </ul>
     </nav>
-    <form method="post">
+    <div class="alert alert-dark" role="alert"><?php echo $name_err."</br>", $user_email_err."</br>", $user_street_err."</br>", $user_street_number_err."</br>", $street_no_number."</br>", $user_city."</br>", $user_zip."</br>", $zip_no_number ?> </div>
+    <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>"> <!-- Sends the submoted form data to the page itself -->
         <div class="form-row">
             <div class="form-group col-md-6">
+                <label for="name">First and last name:</label>
+                <input type="text" id="name" name="name" class="form-control" />
+            </div>
+            <div class="form-group col-md-6">
                 <label for="email">E-mail:</label>
-                <input type="text" id="email" name="email" class="form-control"/>
+                <input type="text" id="email" name="email" class="form-control" <?php echo $user_email_err ?>/>
             </div>
             <div></div>
         </div>
@@ -65,7 +70,7 @@
             <?php endforeach; ?>
         </fieldset>
 
-        <button type="submit" class="btn btn-primary">Order!</button>
+        <button name="submit" type="submit" class="btn btn-primary">Order!</button>
     </form>
 
     <footer>You already ordered <strong>&euro; <?php echo $totalValue ?></strong> in food and drinks.</footer>
