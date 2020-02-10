@@ -1,10 +1,6 @@
 <?php
 //this line makes PHP behave in a more strict way
-declare(strict_types = 1);
 
-ini_set('display_errors', '1');
-ini_set('display_startup_errors', '1');
-error_reporting(E_ALL);
 
 //we are going to use session variables so we need to enable sessions
 session_start();
@@ -50,13 +46,10 @@ if (isset($_POST['submit'])) { // to check if there's something
         }
         if (empty($_POST["streetnumber"])) { // street number verification
             $user_street_number_err = "Street number is required";
-            echo $user_street_number_err;
         } else {
             $streetnumber = test_input($_POST["streetnumber"]);
-            if (is_numeric($streetnumber)) { // 'is numeric' check if the characters entered into the field are numbers or not
-                echo 'The street number you entered is '. $streetnumber.'. This is a valid number';
-            } else {
-                echo 'Error: Please enter numbers only';
+            if (! is_numeric($streetnumber)) { // 'is numeric' check if the characters entered into the field are numbers or not
+                $street_no_number = 'Error: Invalid street number. Please enter numbers only';
             }
         }
         if (empty($_POST["city"])) { // city verification
@@ -65,13 +58,11 @@ if (isset($_POST['submit'])) { // to check if there's something
             $city = test_input($_POST["city"]);
         }
         if (empty($_POST["zipcode"])) { // city verification
-            $user_zip = "";
+            $user_zip = "Zip code is required";
         } else {
             $zipcode = test_input($_POST["zipcode"]);
-            if (is_numeric($zipcode)) { // 'is numeric' check if the characters entered into the field are numbers or not
-                echo 'The zipcode you entered is '. $zipcode.'. This is a valid number';
-            } else {
-                echo 'Error: Invalid zipcode. Please enter numbers only';
+            if (! is_numeric($zipcode)) { // 'is numeric' check if the characters entered into the field are numbers or not
+                $zip_no_number = 'Error: Invalid zipcode. Please enter numbers only';
             }
     }
 
