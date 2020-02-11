@@ -22,16 +22,16 @@
             </li>
         </ul>
     </nav>
-    <div class="alert alert-dark" role="alert"><?php echo $name_err."</br>", $user_email_err."</br>", $user_street_err."</br>", $user_street_number_err."</br>", $street_no_number."</br>", $user_city."</br>", $user_zip."</br>", $zip_no_number ?> </div>
-    <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>"> <!-- Sends the submoted form data to the page itself -->
+    <div class="alert alert-dark" role="alert"><?php echo $name_err."</br>", $user_email_err."</br>", $user_street_err."</br>", $user_street_number_err."</br>", $user_city."</br>", $user_zip."</br>", $zip_no_number."</br>", $street_no_number ?> </div>
+    <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>"> <!-- Sends the submited form data to the page itself -->
         <div class="form-row">
             <div class="form-group col-md-6">
-                <label for="name">First and last name:</label>
-                <input type="text" id="name" name="name" class="form-control" />
+                <label for="name">Full name:</label>
+                <input type="text" id="name" name="name" class="form-control" value="<?php echo $_POST['name']; ?>"/> <!-- value + $_POST is to display what the user entered -->
             </div>
             <div class="form-group col-md-6">
                 <label for="email">E-mail:</label>
-                <input type="text" id="email" name="email" class="form-control" <?php echo $user_email_err ?>/>
+                <input type="text" id="email" name="email" class="form-control" value="<?php echo $_POST['email']; ?>" <?php echo $user_email_err ?>/>
             </div>
             <div></div>
         </div>
@@ -42,21 +42,21 @@
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <label for="street">Street:</label>
-                    <input type="text" name="street" id="street" class="form-control">
+                    <input type="text" name="street" id="street" class="form-control" value="<?php echo $_SESSION['street']; ?>">
                 </div>
                 <div class="form-group col-md-6">
                     <label for="streetnumber">Street number:</label>
-                    <input type="text" id="streetnumber" name="streetnumber" class="form-control">
+                    <input type="text" id="streetnumber" name="streetnumber" class="form-control" value="<?php echo $_SESSION['streetnumber']; ?>">
                 </div>
             </div>
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <label for="city">City:</label>
-                    <input type="text" id="city" name="city" class="form-control">
+                    <input type="text" id="city" name="city" class="form-control" value="<?php echo $_SESSION['city']; ?>">
                 </div>
                 <div class="form-group col-md-6">
                     <label for="zipcode">Zipcode</label>
-                    <input type="text" id="zipcode" name="zipcode" class="form-control">
+                    <input type="text" id="zipcode" name="zipcode" class="form-control" value="<?php echo $_SESSION['zipcode']; ?>">
                 </div>
             </div>
         </fieldset>

@@ -18,19 +18,17 @@ function whatIsHappening() {
 whatIsHappening();
 
 $name_err = $user_email_err = $user_street_err = $user_street_number_err = $user_city = $user_zip = "";// variables to hold error messages for the required field
-$name = $email = $street = $streetnumber = $city = $zipcode = "";
+$name = $email = $street = $streetnumber = $city = $zipcode = $street_no_number = $zip_no_number = "";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") { // check if it's posted
 if (isset($_POST['submit'])) { // to check if there's something
         if (empty($_POST["name"])) { // name verification
             $name_err = "Name is required";
-            echo $name_err;
         } else {
             $name = test_input($_POST["name"]);
         }
         if (empty($_POST["email"])) { // email verification
             $user_email_err = "Email is required";
-            echo $user_email_err;
         } else {
             $email = test_input($_POST["email"]);
             // check if e-mail address is well-formed
@@ -39,12 +37,12 @@ if (isset($_POST['submit'])) { // to check if there's something
                 echo $user_email_err;
             }
         }
-        if (empty($_POST["street"])) { // street verification
+        if (empty($_SESSION['street'] = $_POST["street"])) { // street verification ---used a session
             $user_street_err = "Street is required";
         } else {
             $street = test_input($_POST["street"]);
         }
-        if (empty($_POST["streetnumber"])) { // street number verification
+        if (empty($_SESSION['streetnumber'] = $_POST["streetnumber"])) { // street number verification
             $user_street_number_err = "Street number is required";
         } else {
             $streetnumber = test_input($_POST["streetnumber"]);
@@ -52,12 +50,12 @@ if (isset($_POST['submit'])) { // to check if there's something
                 $street_no_number = 'Error: Invalid street number. Please enter numbers only';
             }
         }
-        if (empty($_POST["city"])) { // city verification
+        if (empty($_SESSION['city'] = $_POST["city"])) { // city verification
             $user_city = "City is required";
         } else {
             $city = test_input($_POST["city"]);
         }
-        if (empty($_POST["zipcode"])) { // city verification
+        if (empty($_SESSION['zipcode'] = $_POST["zipcode"])) { // city verification
             $user_zip = "Zip code is required";
         } else {
             $zipcode = test_input($_POST["zipcode"]);
@@ -65,13 +63,19 @@ if (isset($_POST['submit'])) { // to check if there's something
                 $zip_no_number = 'Error: Invalid zipcode. Please enter numbers only';
             }
     }
-
-
+        /*
+    $toEmail = "admin@phppot_samples.com";
+    $mailHeaders = "From: " . $name . "<". $email .">\r\n";
+    if(mail($toEmail, $street, $city, $mailHeaders)) {
+        $message = "Your order has been received successfully.";
+        $type = "success";
+    }
+*/
 
     }
 }
 function test_input($data) {
-    $data = trim($data);
+    $data = trim($data); // for unnecessary spaces
     $data = stripslashes($data);
     $data = htmlspecialchars($data);
     return $data;
