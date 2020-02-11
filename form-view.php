@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
@@ -18,20 +18,20 @@
                 <a class="nav-link active" href="?food=1">Order food</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="?food=0">Order drinks<?php echo $products_array[1]; ?></a>
+                <a class="nav-link" href="?food=0">Order drinks</a>
             </li>
         </ul>
     </nav>
     <div class="alert alert-dark" role="alert"><?php echo $name_err."</br>", $user_email_err."</br>", $user_street_err."</br>", $user_street_number_err."</br>", $user_city."</br>", $user_zip."</br>", $zip_no_number."</br>", $street_no_number ?> </div>
-    <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>"> <!-- Sends the submited form data to the page itself -->
+    <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>"> <!-- Sends the submitted form data to the page itself -->
         <div class="form-row">
             <div class="form-group col-md-6">
                 <label for="name">Full name:</label>
-                <input type="text" id="name" name="name" class="form-control" value="<?php echo $_POST['name']; ?>"/> <!-- value + $_POST is to display what the user entered -->
+                <input type="text" id="name" name="name" class="form-control" value="<?php echo $result_name; ?>"/> <!-- value + $_POST is to display what the user entered -->
             </div>
             <div class="form-group col-md-6">
                 <label for="email">E-mail:</label>
-                <input type="text" id="email" name="email" class="form-control" value="<?php echo $_POST['email']; ?>" <?php echo $user_email_err ?>/>
+                <input type="text" id="email" name="email" class="form-control" value="<?php echo $result_email; ?>" <?php echo $user_email_err ?>/>
             </div>
             <div></div>
         </div>
@@ -42,7 +42,7 @@
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <label for="street">Street:</label>
-                    <input type="text" name="street" id="street" class="form-control" value="<?php echo $_SESSION['street']; ?>"> <!-- Session will store the address even when refreshing as long as the user doesn't close the window -->
+                    <input type="text" name="street" id="street" class="form-control" value="<?php echo $result_street; ?>"> <!-- Session will store the address even when refreshing as long as the user doesn't close the window -->
                 </div>
                 <div class="form-group col-md-6">
                     <label for="streetnumber">Street number:</label>
@@ -68,6 +68,11 @@
                     <input type="checkbox" value="1" name="products[<?php echo $i ?>]"/> <?php echo $product['name'] ?> -
                     &euro; <?php echo number_format($product['price'], 2) ?></label><br />
             <?php endforeach; ?>
+        </fieldset>
+        <fieldset>
+            <legend>Delivery method</legend>
+            <input type="checkbox" name="check1" value="1"><label>&ensp; <strong>Normal delivery:</strong> It could take up to 2 hours</label><br>
+            <input type="checkbox" name="check2" value="2"><label>&ensp; <strong>Express delivery:</strong> It could take up to 45 minutes</label>
         </fieldset>
 
         <button name="submit" type="submit" class="btn btn-primary">Order!</button>
