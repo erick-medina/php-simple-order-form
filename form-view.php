@@ -18,7 +18,7 @@
                 <a class="nav-link active" href="?food=1">Order food</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="?food=0">Order drinks</a>
+                <a class="nav-link" href="?food=0">Order drinks<?php echo $products_array[1]; ?></a>
             </li>
         </ul>
     </nav>
@@ -42,7 +42,7 @@
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <label for="street">Street:</label>
-                    <input type="text" name="street" id="street" class="form-control" value="<?php echo $_SESSION['street']; ?>">
+                    <input type="text" name="street" id="street" class="form-control" value="<?php echo $_SESSION['street']; ?>"> <!-- Session will store the address even when refreshing as long as the user doesn't close the window -->
                 </div>
                 <div class="form-group col-md-6">
                     <label for="streetnumber">Street number:</label>
@@ -74,6 +74,7 @@
     </form>
 
     <footer>You already ordered <strong>&euro; <?php echo $totalValue ?></strong> in food and drinks.</footer>
+    <div class="alert alert-success" role="alert"><?php echo $message_confirmation ?></div>
 </div>
 
 <style>
