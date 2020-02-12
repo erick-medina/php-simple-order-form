@@ -135,16 +135,16 @@ $products_drink = [
         }
 
     }
-/*
-    if(isset($_POST['checkbox'])){ // checking if the checkboxes exist
-        $checkbox_list = $_POST['checkbox'];
+var_dump($_POST['products']);
+    if(isset($_POST['products'])){ // checking if the checkboxes exist
+        $checkbox_list = $_POST['products'];
 
         foreach ($checkbox_list as $checked=>$value) {
             array_push($products, $value);
         }
     }
-    $sum = array_sum(array_map('intval', $_POST['product']));
-*/
+   // $sum = array_sum(array_map('intval', $_POST['product']));
+
     $totalValue = 0;
 
     require "form-view.php";
