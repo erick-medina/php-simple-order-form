@@ -12,6 +12,7 @@
 <body>
 <div class="container">
     <h1>Order food in restaurant "the Personal Ham Processors"</h1>
+    <div class="alert alert-dark" role="alert"><?php echo $name_err, $user_email_err, $user_street_err, $user_street_number_err, $user_city, $user_zip, $zip_no_number, $street_no_number ?> </div>
     <nav>
         <ul class="nav">
             <li class="nav-item">
@@ -22,12 +23,11 @@
             </li>
         </ul>
     </nav>
-    <div class="alert alert-dark" role="alert"><?php echo $name_err."</br>", $user_email_err."</br>", $user_street_err."</br>", $user_street_number_err."</br>", $user_city."</br>", $user_zip."</br>", $zip_no_number."</br>", $street_no_number ?> </div>
     <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>"> <!-- Sends the submitted form data to the page itself -->
         <div class="form-row">
             <div class="form-group col-md-6">
                 <label for="name">Full name:</label>
-                <input type="text" id="name" name="name" class="form-control" value="<?php echo $result_name; ?>"/> <!-- value + $_POST is to display what the user entered -->
+                <input type="text" id="name" name="name" class="form-control" value="<?php echo $name; ?>" /> <!-- value + $name is to display what the user entered -->
             </div>
             <div class="form-group col-md-6">
                 <label for="email">E-mail:</label>
@@ -42,21 +42,21 @@
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <label for="street">Street:</label>
-                    <input type="text" name="street" id="street" class="form-control" value="<?php echo $result_street; ?>"> <!-- Session will store the address even when refreshing as long as the user doesn't close the window -->
+                    <input type="text" name="street" id="street" class="form-control" value="<?php echo $street_session; ?>"> <!-- Session will store the address even when refreshing as long as the user doesn't close the window -->
                 </div>
                 <div class="form-group col-md-6">
                     <label for="streetnumber">Street number:</label>
-                    <input type="text" id="streetnumber" name="streetnumber" class="form-control" value="<?php echo $_SESSION['streetnumber']; ?>">
+                    <input type="text" id="streetnumber" name="streetnumber" class="form-control" value="<?php echo $street_number_session; ?>">
                 </div>
             </div>
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <label for="city">City:</label>
-                    <input type="text" id="city" name="city" class="form-control" value="<?php echo $_SESSION['city']; ?>">
+                    <input type="text" id="city" name="city" class="form-control" value="<?php echo $city_session; ?>">
                 </div>
                 <div class="form-group col-md-6">
                     <label for="zipcode">Zipcode</label>
-                    <input type="text" id="zipcode" name="zipcode" class="form-control" value="<?php echo $_SESSION['zipcode']; ?>">
+                    <input type="text" id="zipcode" name="zipcode" class="form-control" value="<?php echo $zipcode_session; ?>">
                 </div>
             </div>
         </fieldset>
