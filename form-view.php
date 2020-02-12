@@ -78,7 +78,7 @@
         <button name="submit" type="submit" class="btn btn-primary">Order!</button>
     </form>
 
-    <footer>You already ordered <strong>&euro; <?php echo $totalValue ?></strong> in food and drinks.</footer>
+    <footer>You already ordered <strong>&euro; <?php echo $_COOKIE['totalAmount']?? '0'   ?></strong> in food and drinks.</footer>
     <div class="alert alert-success" role="alert"><?php echo $message_confirmation ?></div>
 </div>
 

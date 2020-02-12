@@ -1,6 +1,8 @@
 <?php
 //this line makes PHP behave in a more strict way
 
+//we are going to use session variables so we need to enable sessions
+session_start();
 
 function whatIsHappening() {
     echo '<h2>$_GET</h2>';
@@ -140,16 +142,9 @@ for ($i = 0; $i < count($products); $i++) {
         $totalValue += $products[$i]["price"];
     }
 }
-echo $totalValue;
-    /*
-var_dump($_POST['products']);
-    if(isset($_POST['products'])){ // checking if the checkboxes exist
-        $checkbox_list = $_POST['products'];
 
-        foreach ($checkbox_list as $checked=>$value) {
-            array_push($products, $value);
-        }
-    }
-   // $sum = array_sum(array_map('intval', $_POST['product']));
-*/
+setcookie("totalAmount", $totalValue, time()+(86400), '/');
+if(isset($_COOKIE['totalAmount'])) {
+    $totalValue = $_COOKIE["totalAmount"];
+}
     require "form-view.php";
