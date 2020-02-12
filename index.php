@@ -1,12 +1,6 @@
 <?php
 //this line makes PHP behave in a more strict way
-declare(strict_types = 1);
 
-ini_set('display_errors', '1');
-ini_set('display_startup_errors', '1');
-error_reporting(E_ALL);
-//we are going to use session variables so we need to enable sessions
-session_start();
 
 function whatIsHappening() {
     echo '<h2>$_GET</h2>';
@@ -43,7 +37,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") { // check if it's posted
         }
         if (empty($_POST['street'])) { // street verification ---used a session
             $user_street_err = 'Street is required </br>';
-            $street_session = "";
         } else {
             $_SESSION["street"]  = test_input($_POST['street']);
             $street_session = $_SESSION['street'];
@@ -112,6 +105,7 @@ $products = [
     ['name' => 'Club Chicken', 'price' => 4],
     ['name' => 'Club Salmon', 'price' => 5]
 ];
+var_dump($products[3]['price']);
 
 $products_food = [
     ['name' => 'Club Ham', 'price' => 3.20],
@@ -135,6 +129,19 @@ $products_drink = [
         }
 
     }
+
+$price_arr = [];
+if (!empty($_POST["products"])) {
+    $price_arr = $_POST["products"];
+}
+$totalValue = 0;
+for ($i = 0; $i < count($products); $i++) {
+    if (isset($price_arr[$i])) {
+        $totalValue += $products[$i]["price"];
+    }
+}
+echo $totalValue;
+    /*
 var_dump($_POST['products']);
     if(isset($_POST['products'])){ // checking if the checkboxes exist
         $checkbox_list = $_POST['products'];
@@ -144,7 +151,5 @@ var_dump($_POST['products']);
         }
     }
    // $sum = array_sum(array_map('intval', $_POST['product']));
-
-    $totalValue = 0;
-
+*/
     require "form-view.php";
