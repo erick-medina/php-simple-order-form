@@ -83,9 +83,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") { // check if it's posted
 */
 }
 
-if ($counter_elements == 5) { // if all elements are filled in, then the message confirmation will be displayed
-    $message_confirmation = "Your order has been successfully sent";
-}
 function test_input($data) {
     $data = trim($data); // for unnecessary spaces
     $data = stripslashes($data);
@@ -136,15 +133,21 @@ $price_arr = [];
 if (!empty($_POST["products"])) {
     $price_arr = $_POST["products"];
 }
+
 $totalValue = 0;
 for ($i = 0; $i < count($products); $i++) {
     if (isset($price_arr[$i])) {
         $totalValue += $products[$i]["price"];
+        $counter_elements++;
     }
 }
 
 setcookie("totalAmount", $totalValue, time()+(86400), '/');
 if(isset($_COOKIE['totalAmount'])) {
     $totalValue = $_COOKIE["totalAmount"];
+}
+
+if ($counter_elements == 6) { // if all elements are filled in, then the message confirmation will be displayed
+    $message_confirmation = "Your order has been successfully sent";
 }
     require "form-view.php";
